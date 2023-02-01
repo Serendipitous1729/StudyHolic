@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <link rel="stylesheet" href="styles.css">
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+    <body>
+        <div class="center-align">
+            <div id="today">
+                <p id="time">Current time (loading...)</p>
+                <p id="date">Today's date (loading...)</p>
+            </div>
+        </div>
+        <div class="right-align" id="todo-list-container">
+            <div id="todo-list">
+                <div id="todo-list-header" class="center-align">
+                    <h1>To - Do List </h1>
+                    <h4>Add your work for today</h4>
+                </div>
+                <div class="center-align">
+                    <input type="text" placeholder="Add tasks to your to-do list">
+                    <button class="btn">Submit</button>
+                </div>
+                <ul id="todo-list-entries" class="left-align">
+                    <li class="todo-li">Homework</li>
+                    <li class="todo-li">Study</li>
+                    <li class="todo-li">Group Study</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="logo-details">
+            <i class='bx bxs-bookmark-star' ></i>
+              <div class="logo_name">Favourites</div>
+              <i class='bx bx-menu' id="favourites-btn"></i>
+            </div>
+            <ul class="nav-list">
+              <li>
+                <a id="add-fav">
+                    <i class='bx bx-plus'></i>
+                  <span class="links_name">Add More</span>
+                </a>
+                <span class="tooltip">Add More</span>
+              </li>
+            </ul>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
