@@ -175,15 +175,14 @@ loadTodoList();
 
 document.querySelector("#add-fav").addEventListener("click", async function() {
     let favourites = await getSyncStorage("favourites");
-    if(favourites.length < 11){
+    if(favourites.length < 10){
         var weblink = prompt("Paste the site's URL here:");
         var webname = prompt("Enter the site's name here:");
 
-        if(favourites.length >= 10){
-            document.querySelector("#add-fav").classList.add("hide");
-        }
-
-        if((weblink.slice(0, 8) == "https://" || weblink.slice(0, 7) == "http://") && weblink.trim().length > 0){
+        if((weblink.slice(0, 8) == "https://" || weblink.slice(0, 7) == "http://") && weblink.trim().length > 0 && webname.trim().length > 0){
+            if(favourites.length >= 9){
+                document.querySelector("#add-fav").classList.add("hide");
+            }
             favourites.push({ name: webname, href: weblink});
             await setSyncStorage("favourites", favourites);
             addFavourite(weblink, webname, favourites.length);
@@ -194,6 +193,7 @@ document.querySelector("#add-fav").addEventListener("click", async function() {
 });
 (async function(){
     let favourites = await getSyncStorage("favourites");
+    console.log(favourites.length);
     if(favourites.length >= 10){
         document.querySelector("#add-fav").classList.add("hide");
     }else{
@@ -245,6 +245,7 @@ document.querySelector("#favourite-delete-contextmenu").addEventListener("click"
     favSites.splice(fid.slice(1, fid.length), 1);
     await setSyncStorage("favourites", favSites);
     favouriteToDelete.remove();
+    document.querySelector("#add-fav").classList.remove("hide");
 });
 
 // console.log(chrome); this comment is to honour the line that saved this project and my sanity
