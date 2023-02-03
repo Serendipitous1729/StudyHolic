@@ -1,0 +1,473 @@
+
+  body{
+    overflow-y: hidden;
+    overflow-x: scroll;
+    min-width: 1000px;
+  }
+  .center-align{
+    text-align: center;
+  }
+  .left-align{
+    text-align: left;
+  }
+  .right-align{
+    text-align: right;
+  }  
+  .hide{
+    display: none !important;
+  }
+  /**
+      HOME PAGE CLOCK
+  **/
+  #time, #date{
+    text-align: center;
+    user-select: none;
+}
+#time{
+  font-size: 600%;
+  margin: 0;
+  border: 10px solid #1d1b31;
+  border-radius: 20px;
+  box-shadow: 0 0 15px #1d1b31;
+}
+#date{
+    font-size: 200%;
+    margin: 0.5em 0 0;
+}
+#today{
+    display: inline-block;
+    width: 30%;
+    margin-top: 1%;
+}
+  /*
+      TODO-LIST
+  */
+  :root {
+      --primary-color: #1d1b31;
+      --b-s-top-color: #ffffff;
+      --b-s-bottom-color: #ffffff;
+      --primary-text-color: #e3e3ee;
+      --hover-text-color: #f9f5f5;
+  }
+  #todo-list {
+      background-color: var(--primary-color);
+      display: inline-block;
+      
+  }
+  #todo-list {
+      padding: 1.5em;
+      border: 5px black;
+      height: 500px;
+      width: 450px;
+      border-radius: 30px;
+      color: white;
+            box-shadow: -5px -5px 5px #525252,
+                    5px 5px 5px  #525252;;
+  
+    
+  }
+  #todo-list h1{
+          text-transform: capitalize; 
+          font-weight: 100;
+          font-size: 2rem;
+          color: white;
+  }
+  #todo-list h4{
+          text-transform: uppercase;
+          font-size: 1rem;
+          color: white;
+  }
+  #todo-list ul {
+      padding: 0;
+      list-style: none;
+  }
+  #todo-list-container{
+      position: fixed;
+      right: 10px;
+      top: 10px;
+      bottom: 10px;
+      transition: 0.5s;
+  }
+  #todo-list-entries {
+      
+      max-height: 60%;
+      overflow-y: scroll ;
+      
+  }
+  /* Position and style the close button (top right corner) */
+  .sidepanel .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+ /* Style the button that is used to open the sidepanel */
+.tdOpening {
+  position: absolute;
+  text-transform: uppercase;
+  color:black;
+  right: 10px;
+  top: 10px;
+  font-weight: 700;
+  padding: .6em .7em;
+  border: white;
+  background-color: white;
+  box-shadow: 5px 5px 13px #787c82;
+  border-radius: 3.125em;
+  cursor: pointer;
+}
+
+.tdOpening:hover {
+  background-color: rgb(61, 57, 57);
+  color:white;
+}   
+  .todo-li{
+      transition: 100ms ease-in-out;
+      color: white;
+      padding-top: .5em;
+      padding-bottom: .5em;
+      word-wrap: break-word;
+      
+  }
+  .todo-li:hover{
+      color: white;
+      text-decoration: line-through;
+      cursor: pointer;
+  }
+  .btn {
+      text-transform: uppercase;
+      color:black;
+      font-weight: 700;
+      padding: .6em .7em;
+      border: white;
+      background-color: white;
+      box-shadow: 2px 2px 10px #787c82;
+      border-radius: 3.125em;
+  }
+  .btn:hover{
+      box-shadow: 2px 2px 10px #aeb3ba ;
+  }
+  .btn:active{
+      box-shadow: 2px 2px 10px #d9dce0 ;
+    }
+  input {
+      padding: .6em .7em;
+      border-radius: 3.125em;
+      margin: 0;
+      box-shadow: 2px 2px 10px #787c82 ;
+      
+  }
+  
+  /*
+      SIDEBAR
+  */
+  *{ 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins" , sans-serif;
+  }
+  .sidebar{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 78px;
+    background: #11101D;
+    padding: 6px 14px;
+    z-index: 99;
+    transition: all 0.5s ease;
+    max-height: 100%;
+  }
+  .sidebar.open{
+    width: 250px;
+  }
+  .sidebar .logo-details{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    
+  }
+  .sidebar .logo-details .icon{
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+  .sidebar .logo-details .logo_name{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.5s ease;
+    
+  }
+  .sidebar.open .logo-details .icon,
+  .sidebar.open .logo-details .logo_name{
+    opacity: 1;
+  }
+  .sidebar .logo-details #btn{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 22px;
+    transition: all 0.4s ease;
+    font-size: 23px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+  .sidebar.open .logo-details #btn{
+    text-align: right;
+    
+  }
+  .sidebar i{
+    color: #fff;
+    height: 60px;
+    min-width: 50px;
+    font-size: 28px;
+    text-align: center;
+    line-height: 60px;
+  }
+  .sidebar .nav-list{
+    margin-top: 20px;
+    height: 100%;
+  }
+  .sidebar li{
+    position: relative
+    ;
+    margin: 8px 0;
+    list-style: none;
+  }
+  .sidebar li .tooltip{
+    position: absolute;
+    top: -20px;
+    left: calc(100% + 15px);
+    z-index: 3;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 400;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: 0s;
+  }
+  .sidebar li:hover .tooltip{
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.4s ease;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .sidebar.open li .tooltip{
+    display: none;
+  }
+  .sidebar li a{
+    display: flex;
+    border-radius: 12px;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    background: #11101D;
+  }
+  .sidebar li a:hover{
+    background: #FFF;
+  }
+  .sidebar li a .links_name{
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
+  }
+  .sidebar.open li a .links_name{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .sidebar li a:hover .links_name,
+  .sidebar li a:hover i{
+    transition: all 0.5s ease;
+    color: #11101D;
+  }
+  .sidebar li i{
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    border-radius: 12px;
+  }
+  .sidebar li.profile{
+    position: fixed;
+    height: 60px;
+    width: 78px;
+    left: 0;
+    bottom: -8px;
+    padding: 10px 14px;
+    background: #1d1b31;
+    transition: all 0.5s ease;
+    overflow: hidden;
+  }
+  
+  .sidebar li .profile-details{
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  .sidebar li img{
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 10px;
+  
+    
+  }
+  .sidebar li.profile .name,
+  .sidebar li.profile .job{
+    font-size: 15px;
+    font-weight: 400;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .sidebar li.profile .job{
+    font-size: 12px;
+  }
+  
+  .home-section{
+    position: relative;
+    background: #ffffff;
+    min-height: 100vh;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+    z-index: 2;
+  }
+  .sidebar.open ~ .home-section{
+    left: 250px;
+    width: calc(100% - 250px);
+  }
+  .home-section .text{
+    display: inline-block;
+    color: #11101d;
+    font-size: 25px;
+    font-weight: 500;
+    margin: 18px
+  }
+  .favourite-icon{
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+  }
+  img{
+    display: inline-block;
+    image-rendering:sharp;
+    
+  }
+  @media (max-width: 420px) {
+    .sidebar li .tooltip{
+      display: none;
+    }
+  }
+  
+  #favourite-delete-contextmenu{
+    border-radius: 7.5px;
+    background-color: #111;
+    display: inline-block;
+    position: fixed;
+    font-size: 15px;
+    padding: 0.5em;
+    color: #FFF;
+    border: 1px solid #AAA;
+    cursor: pointer;
+    z-index: 100;
+  }
+  #favourite-delete-contextmenu:hover{
+    background-color: #333;
+  }
+  #favourite-delete-contextmenu:active{
+    background-color: #555;
+  }
+ 
+  /* --------------------------------Buttons-----------------------------------*/
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+html,body{
+  display: grid;
+  height: 100%;
+  place-items: right;
+  overflow: hidden;
+}
+
+.buttons{
+  display: block;
+  text-align: center;
+}
+.buttons a{
+  text-decoration: none;
+}
+.homebutton{
+/*   position:absolute; */
+  height: 60px;
+  width: 250px;
+  margin: 0 30px;
+  top: 200px;
+  left: 170px;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  background: #1d1b31;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.5s;
+  box-shadow: 7px 7px 13px #787c82;
+}
+.homebutton:hover{
+  background: linear-gradient(90deg, #71f97a, #098500, #03e229, #71f973);
+  background-size: 400%;
+}
+.homebutton:last-child:before{
+  content: '';
+  position: relative; 
+  background: inherit;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px; 
+  border-radius: 50px;
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.homebutton:hover:before{
+  opacity: 1;
+  z-index: -1;
+  box-shadow: 15px 15px ;
+}
+.homebutton:hover{
+  z-index: 1;
+  animation: glow 8s linear infinite;
+}
+
+@keyframes glow {
+  0%{
+    background-position: 0%;
+  }
+  100%{
+    background-position: 400%;
+  }
+}
