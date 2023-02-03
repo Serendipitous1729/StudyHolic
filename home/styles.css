@@ -28,7 +28,7 @@ html, body {
 #time{
     font-size: 600%;
     margin: 0;
-    border: 10px solid #525252;
+    border: 10px solid  #1d1b31;
     border-radius: 20px;
     box-shadow: 10px 10px 25px #525252;
 }
@@ -63,8 +63,8 @@ html, body {
       width: 450px;
       border-radius: 30px;
       color: white;
-      box-shadow: -5px -5px 5px #878787,
-                    5px 5px 5px #7a7a7a;;
+      box-shadow: -5px -5px 5px #525252,
+                    5px 5px 5px  #525252;;
   
     
   }
