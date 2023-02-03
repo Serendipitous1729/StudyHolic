@@ -1,50 +1,21 @@
-// var focusModeToggle = document.getElementById("focus-mode-toggle");
-// function getFocusMode(){
-//     chrome.storage.sync.get(["focusMode"]).then(function(result){
-//         console.log(result.focusMode);
-//         return result.focusMode;
-//     });
-// }
-// function setFocusMode(focusModeState){
-//     // focusModeState = "active"/"inactive"
-//     // Setting focusModeState to a boolean value didn't work, so we set it to a string
-//     chrome.storage.sync.set({"focusMode": focusModeState}).then(function(){
-//         console.log("Set focus mode to: " + getFocusMode());
-//     });
-// }
-// function updateFocusToggleState(focusModeState){
-//     if(focusModeState == "active"){
-//         focusModeToggle.checked = true;
-//     }else if(focusModeState == "inactive"){
-//         focusModeToggle.checked = false;
-//     }
-// }
-
-// if(getFocusMode() == undefined){
-//     setFocusMode("active");
-// }
-// updateFocusToggleState(getFocusMode());
-
-// focusModeToggle.addEventListener("click", function(){
-//     setFocusMode(focusModeToggle.checked ? "active" : "inactive");
-//     // console.log(getFocusMode());
-// });
-
 // The toggle switch's checkbox
 var focusModeToggle = document.getElementById("focus-mode-toggle");
 
-// Functions to get and set the focus mode and store it in synced storage
-// (It's synced so the settings can be the same on other devices too)
-async function getFocusMode(){
+var blockedSitesContainer = document.getElementById("blocked-sites");
+
+
+
+async function getSyncStorage(key){
     return new Promise((resolve) => {
-        chrome.storage.sync.get(["focusMode"], (result) => {
-            resolve(result.focusMode);
+        chrome.storage.sync.get([key], (result) => {
+            resolve(result[key]);
         });
     });
 }
-async function setFocusMode(focusModeState){
-    chrome.storage.sync.set({"focusMode": focusModeState});
-    // console.log("Set focus mode to: " + focusModeState); <-- Uncomment for debugging purposes
+async function setSyncStorage(key, value){
+    var queryObject = {};
+    queryObject[key] = value;
+    chrome.storage.sync.set(queryObject);
 }
 
 async function updateFocusToggleState(focusModeState){
@@ -52,10 +23,35 @@ async function updateFocusToggleState(focusModeState){
 }
 
 (async () => {
-    let focusMode = await getFocusMode();
-    updateFocusToggleState(focusMode);
-    focusModeToggle.addEventListener("click", async () => {
-        await setFocusMode(focusModeToggle.checked);
-        updateFocusToggleState(focusModeToggle.checked);
-    });
+    if(focusModeToggle){
+        let focusMode = await getSyncStorage("focusMode");
+        updateFocusToggleState(focusMode);
+        focusModeToggle.addEventListener("click", async () => {
+            await setSyncStorage("focusMode", focusModeToggle.checked);
+            updateFocusToggleState(focusModeToggle.checked);
+        });
+    }
+    if(blockedSitesContainer){
+        let blockedSites = await getSyncStorage("blockedSites");
+        for(var i = 0; i < blockedSites.length; i++){
+            var site = document.createElement("div");
+            site.innerHTML = "<a href="+blockedSites[i]+" class='menu-option-text blocked-site'>"+blockedSites[i]+"<span id="+i+" class='delete-blocked-site'>[Delete]</span></a>";
+            blockedSitesContainer.append(site);
+        }
+        document.querySelectorAll(".delete-blocked-site").forEach(async function(el){
+            el.addEventListener("click", async function(){
+                var shouldDel = confirm("Are you sure you want to delete\n'" + el.parentElement.getAttribute("href") + "' from the sites blocked by focus mode?");
+                if(shouldDel){
+                    let blockedSites = await getSyncStorage("blockedSites");
+                    blockedSites.splice(this.getAttribute("id"), 1);
+                    await setSyncStorage("blockedSites", blockedSites);
+                    window.location.reload();
+                }
+            });
+        })
+        // var site = document.createElement("div");
+        // site.innerHTML = "<a href="+blockedSites[i]+" class='menu-option-text blocked-site'>"+blockedSites[i]+"</a>";
+        // blockedSitesContainer.append(site);
+    }
 })();
+

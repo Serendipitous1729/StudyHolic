@@ -2,9 +2,33 @@ body{
   margin: 0;
 }
 
+.center-align{
+  text-align: center;
+}
+.left-align{
+  text-align: left;
+}
+.right-align{
+  text-align: right;
+}  
+
+.delete-blocked-site{
+  display: inline-block;
+  color: #333;
+  cursor: pointer;
+}
+.delete-blocked-site:hover{
+  color: #AAA;
+}
+.delete-blocked-site:active{
+  color: #BBB;
+}
+
 #popup-container{
   max-width: 400px;
   max-height: 600px;
+  overflow-x: scroll;
+  overflow-y: scroll;
   width:400px;
 }
 
@@ -18,7 +42,7 @@ body{
   display: inline;
   color: #000;
 }
-#focus-mode-settings, #notification-centre{
+#focus-mode-settings, #notification-centre, .blocked-site{
   color: #2196F3;
 }
 #new-notifications{
