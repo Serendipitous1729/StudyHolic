@@ -48,10 +48,17 @@ async function updateFocusToggleState(focusModeState){
                     window.location.reload();
                 }
             });
-        })
-        // var site = document.createElement("div");
-        // site.innerHTML = "<a href="+blockedSites[i]+" class='menu-option-text blocked-site'>"+blockedSites[i]+"</a>";
-        // blockedSitesContainer.append(site);
+        });
+        document.querySelector("#add-site").addEventListener("click", async function(){
+            let blockedSites = await getSyncStorage("blockedSites");
+            var weblink = prompt("Paste the site's URL here:");
+
+            if((weblink.slice(0, 8) == "https://" || weblink.slice(0, 7) == "http://") && weblink.trim().length > 0){
+                blockedSites.push(weblink);
+                await setSyncStorage("blockedSites", blockedSites);
+                window.location.reload();
+            }
+        });
     }
 })();
 

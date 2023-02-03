@@ -24,6 +24,23 @@ body{
   color: #BBB;
 }
 
+#add-site{
+    border: none;
+    background-color: #1d1b31;
+    border-radius: 7.5px;
+    width: 70px;
+    height: 30px;
+    color: #FFF;
+    font-size: 1rem;
+}
+#add-site:hover{
+  box-shadow: 0 0 5px #444;
+}
+#add-site:active{
+  box-shadow: 0 0 8px #111;
+  background-color: #322f53;
+}
+
 #popup-container{
   max-width: 400px;
   max-height: 600px;
