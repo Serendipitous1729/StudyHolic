@@ -50,7 +50,7 @@ dateInput = document.querySelector("#duedate"),
 ul = document.querySelector("ul.nav-list"),
 
 listItems = document.querySelectorAll(".todo-li"),
-todoOpenBtn = document.querySelector("#todo-open"),
+todoOpenBtn = document.querySelector(".tdOpening"),
 todoCloseBtn = document.querySelector("#todo-close");
 
 /* Set the width of the sidebar to 250px (show it) */

@@ -30,7 +30,7 @@ html, body {
     margin: 0;
     border: 10px solid #525252;
     border-radius: 20px;
-    box-shadow: 0 0 15px #525252;
+    box-shadow: 10px 10px 25px #525252;
 }
 #date{
     font-size: 200%;
@@ -105,15 +105,26 @@ html, body {
     margin-left: 50px;
   }
   
-  /* Style the button that is used to open the sidepanel */
-  .openbtn {
-    font-size: 20px;
-    cursor: pointer;
-    background-color: #111;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-  }
+ /* Style the button that is used to open the sidepanel */
+.tdOpening {
+  position: absolute;
+  text-transform: uppercase;
+  color:black;
+  top: 30px;
+  left: 1100px;
+  font-weight: 700;
+  padding: .6em .7em;
+  border: white;
+  background-color: white;
+  box-shadow: 5px 5px 13px #787c82;
+  border-radius: 3.125em;
+  cursor: pointer;
+}
+
+.tdOpening:hover {
+  background-color: rgb(61, 57, 57);
+  color:white;
+}   
   .todo-li{
       transition: 100ms ease-in-out;
       color: white;
@@ -384,4 +395,78 @@ html, body {
   #favourite-delete-contextmenu:active{
     background-color: #555;
   }
-  
+ 
+  /* --------------------------------Buttons-----------------------------------*/
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+html,body{
+  display: grid;
+  height: 100%;
+  place-items: right;
+  overflow: hidden;
+}
+
+.buttons{
+  display: block;
+  text-align: center;
+}
+.homebutton{
+/*   position:absolute; */
+  height: 60px;
+  width: 250px;
+  margin: 0 30px;
+  top: 200px;
+  left: 170px;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  background: #1d1b31;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.5s;
+  box-shadow: 7px 7px 13px #787c82;
+}
+.homebutton:hover{
+  background: linear-gradient(90deg, #71f97a, #098500, #03e229, #71f973);
+  background-size: 400%;
+}
+.homebutton:last-child:before{
+  content: '';
+  position: relative; 
+  background: inherit;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px; 
+  border-radius: 50px;
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.homebutton:hover:before{
+  opacity: 1;
+  z-index: -1;
+  box-shadow: 15px 15px ;
+}
+.homebutton:hover{
+  z-index: 1;
+  animation: glow 8s linear infinite;
+}
+
+@keyframes glow {
+  0%{
+    background-position: 0%;
+  }
+  100%{
+    background-position: 400%;
+  }
+}
