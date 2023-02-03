@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
     "name": "StudyHolic",
-    "description": "Your digital study buddy!",
-    "version": "0.1",
+    "description": "Unleash your true potential with StudyHolic - the Chrome extension designed to help you focus and excel in your studies. Block distractions, manage your time, and stay on top of your work with ease.",
+    "version": "1.0",
 
     "icons": {
         "128": "study.png"

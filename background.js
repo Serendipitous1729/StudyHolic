@@ -20,15 +20,7 @@ async function setSyncStorage(key, value){
     queryObject[key] = value;
     chrome.storage.sync.set(queryObject);
 }
-var blockYoutube = true;
-// const youtubeBlockedSites = [
-//     "https://www.youtube.com/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ",
-//     "https://www.youtube.com/channel/UC4R8DWoMoI7CAwX8_LjQHig",
-//     "https://www.youtube.com/gaming",
-//     "https://www.youtube.com/channel/UCYfdidRxbB8Qhf0Nx7ioOYw",
-//     "https://www.youtube.com/channel/UCEgdi0XIXXZ-qJOFPf4JSKw",
-//     "https://www.youtube.com/channel/UCrpQ4p1Ql_hG8rKXIKM1MOQ"
-// ];
+var blockYoutube = true; // TODO: We can add an option to allow them to turn blocking youtube on and off.
 (async function(){
     var blockedSites = await getSyncStorage("blockedSites");
     if(blockedSites == undefined){
@@ -45,14 +37,14 @@ var blockYoutube = true;
     }
 
     let favourites = await getSyncStorage("favourites");
-    //if(favourites == undefined){
+    if(favourites == undefined){
         await setSyncStorage("favourites", [
             { name: "Google Search", href: "https://www.google.com/"},
             { name: "Gmail", href: "https://mail.google.com/mail/u/0/#inbox"},
             { name: "YouTube", href: "https://www.youtube.com" },
             { name: "Discord", href: "https://discord.com/channels/@me" }
         ]);
-    //}
+    }
     let todoEntries = await getSyncStorage("todoEntries");
     if(todoEntries == undefined){
         await setSyncStorage("todoEntries", ["Add your pending tasks here!"]);
@@ -62,7 +54,7 @@ var blockYoutube = true;
 chrome.tabs.onUpdated.addListener(async function(tabId, changeInfo, tab){
     let focusMode = await getSyncStorage("focusMode");
     if(focusMode == true){
-    
+        
         var blockedSites = await getSyncStorage("blockedSites");
         for(var i = 0; i < blockedSites.length; i++){
             if(tab.url.slice(0, blockedSites[i].length) == blockedSites[i]){
@@ -72,12 +64,6 @@ chrome.tabs.onUpdated.addListener(async function(tabId, changeInfo, tab){
         }
         // Check YouTube sites
         if(blockYoutube && tab.url.slice(0, 24) == "https://www.youtube.com/"){
-            // for(var i = 0; i < youtubeBlockedSites.length; i++){
-            //     if(tab.url.slice(0, youtubeBlockedSites[i].length) == youtubeBlockedSites[i]){
-            //         // Checks if the first part of the page url is a blocked site
-            //         chrome.tabs.update(tabId, {url: "chrome://newtab"});
-            //     }
-            // }
             var validUrlBeginnings = ["https://www.youtube.com/watch?v=", "https://www.youtube.com/playlist?list=", "https://www.youtube.com/results?search_query="];
             
             var isOnValidYTSite = false;
