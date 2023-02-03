@@ -1,3 +1,10 @@
+async function getSyncStorage(key){
+  return new Promise((resolve) => {
+      chrome.storage.sync.get([key], (result) => {
+          resolve(result[key]);
+      });
+  });
+}
 window.addEventListener("load", async function(){
   let isFocusMode = await getSyncStorage("focusMode");
   // so far, the best method to replace stuff on page is to wait manually for a while, due to issues with loading
