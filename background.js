@@ -45,14 +45,14 @@ var blockYoutube = true;
     }
 
     let favourites = await getSyncStorage("favourites");
-    if(favourites == undefined){
+    //if(favourites == undefined){
         await setSyncStorage("favourites", [
             { name: "Google Search", href: "https://www.google.com/"},
             { name: "Gmail", href: "https://mail.google.com/mail/u/0/#inbox"},
             { name: "YouTube", href: "https://www.youtube.com" },
-            { name: "Discord", href: "https://www.discord.com" }
+            { name: "Discord", href: "https://discord.com/channels/@me" }
         ]);
-    }
+    //}
     let todoEntries = await getSyncStorage("todoEntries");
     if(todoEntries == undefined){
         await setSyncStorage("todoEntries", ["Add your pending tasks here!"]);
@@ -64,8 +64,6 @@ chrome.tabs.onUpdated.addListener(async function(tabId, changeInfo, tab){
     if(focusMode == true){
     
         var blockedSites = await getSyncStorage("blockedSites");
-        console.log(blockedSites);
-        console.log("checking...");
         for(var i = 0; i < blockedSites.length; i++){
             if(tab.url.slice(0, blockedSites[i].length) == blockedSites[i]){
                 // Checks if the first part of the page url is a blocked site
