@@ -47,7 +47,8 @@ window.setInterval(function() {
 var button = document.querySelector("#todo-btn"),
 input = document.querySelector("#add-task"),
 dateInput = document.querySelector("#duedate"),
-ul = document.querySelector("ul"),
+ul = document.querySelector("ul.nav-list"),
+
 listItems = document.querySelectorAll(".todo-li"),
 todoOpenBtn = document.querySelector("#todo-open"),
 todoCloseBtn = document.querySelector("#todo-close");
@@ -93,7 +94,7 @@ button.addEventListener("click", addToListOnClick);
 input.addEventListener("keypress", addToListOnEnter)
 
 function inputLength() {
-    return input.value.length;
+    return input.value.trim().length;
 }
 function clearInput() {
     input.value = "";
@@ -125,7 +126,7 @@ async function addElementToList(listEntry, id) {
 
     li.innerText = listEntry;
     removeOnClick(li);
-    ul.prepend(li);
+    document.querySelector("#todo-list-entries").prepend(li);
     clearInput();
 }
 
@@ -168,30 +169,82 @@ async function loadTodoList(){
 }
 loadTodoList();
 
-//--------------------
-document.querySelector("#add-fav").addEventListener("click", async function() {
-    var weblink = prompt("Enter the link:");
-    var webname = prompt("What is the sites name:");
-    let favourites = await getSyncStorage("favourites");
-    favourites.push({ name: webname, href: weblink});
-    await setSyncStorage("favourites", favourites);
-    addFavourite(weblink, webname);
-});
 
-function addFavourite(weblink, webname) {
+
+// Favourites
+
+document.querySelector("#add-fav").addEventListener("click", async function() {
+    let favourites = await getSyncStorage("favourites");
+    if(favourites.length < 11){
+        var weblink = prompt("Paste the site's URL here:");
+        var webname = prompt("Enter the site's name here:");
+
+        if(favourites.length >= 10){
+            document.querySelector("#add-fav").classList.add("hide");
+        }
+
+        if((weblink.slice(0, 8) == "https://" || weblink.slice(0, 7) == "http://") && weblink.trim().length > 0){
+            favourites.push({ name: webname, href: weblink});
+            await setSyncStorage("favourites", favourites);
+            addFavourite(weblink, webname, favourites.length);
+        }
+
+        
+    }
+});
+(async function(){
+    let favourites = await getSyncStorage("favourites");
+    if(favourites.length >= 10){
+        document.querySelector("#add-fav").classList.add("hide");
+    }else{
+        document.querySelector("#add-fav").classList.remove("hide");
+    }
+})();
+
+function addFavourite(weblink, webname, id) {
     var newElement = document.createElement("li");
     newElement.innerHTML = "<a class='favourite-icon' href=" + weblink + " target = '_blank'><img class='favicon-img' src=" + "https://s2.googleusercontent.com/s2/favicons?domain_url=" + weblink + "><span class='links_name'>" + webname + "</span></a><span class='tooltip'>" + webname + "</span>";
-    // TODO: Get better icons
+    newElement.classList.add("favourite-icon-li");
+    newElement.setAttribute("id", "f"+id);
     document.querySelector("ul.nav-list").prepend(newElement);
 }
-
+var favouriteToDelete;
 async function loadFavourites(){
     let favourites = await getSyncStorage("favourites");
     for (var i = 0; i < favourites.length; i++) {
-        addFavourite(favourites[i].href, favourites[i].name);
+        addFavourite(favourites[i].href, favourites[i].name, i);
     }
+
+    document.querySelectorAll("li.favourite-icon-li").forEach(function(el){
+        el.addEventListener("contextmenu", function(e){
+            if(e.which == 3){
+                favouriteToDelete = el;
+                document.querySelector("#favourite-delete-contextmenu").style.left = e.clientX+"px";
+                document.querySelector("#favourite-delete-contextmenu").style.top = e.clientY+"px";
+            }
+        });
+    });
 }
 
 loadFavourites();
+
+document.oncontextmenu = function(){return false;};
+document.onclick = function(e){
+    if(e.which == 1){
+        document.querySelector("#favourite-delete-contextmenu").style.left = window.innerWidth+"px";
+        document.querySelector("#favourite-delete-contextmenu").style.top = window.innerHeight+"px";
+    }
+}
+document.querySelector("#favourite-delete-contextmenu").style.left = window.innerWidth+"px";
+document.querySelector("#favourite-delete-contextmenu").style.top = window.innerHeight+"px";
+
+document.querySelector("#favourite-delete-contextmenu").addEventListener("click", async function(){
+    var favSites = await getSyncStorage("favourites");
+    var fid = favouriteToDelete.getAttribute("id");
+    console.log(fid);
+    favSites.splice(fid.slice(1, fid.length), 1);
+    await setSyncStorage("favourites", favSites);
+    favouriteToDelete.remove();
+});
 
 // console.log(chrome); this comment is to honour the line that saved this project and my sanity

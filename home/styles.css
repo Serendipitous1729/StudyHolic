@@ -15,6 +15,9 @@ html, body {
   .right-align{
     text-align: right;
   }  
+  .hide{
+    display: none !important;
+  }
   /**
       HOME PAGE CLOCK
   **/
@@ -363,4 +366,22 @@ html, body {
     }
   }
   
+  #favourite-delete-contextmenu{
+    border-radius: 7.5px;
+    background-color: #111;
+    display: inline-block;
+    position: fixed;
+    font-size: 15px;
+    padding: 0.5em;
+    color: #FFF;
+    border: 1px solid #AAA;
+    cursor: pointer;
+    z-index: 100;
+  }
+  #favourite-delete-contextmenu:hover{
+    background-color: #333;
+  }
+  #favourite-delete-contextmenu:active{
+    background-color: #555;
+  }
   
